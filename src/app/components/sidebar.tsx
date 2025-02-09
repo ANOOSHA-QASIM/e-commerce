@@ -61,7 +61,7 @@ const products: Product[] = [
 const Sidebar = ({
   title,
   image,
-  sidetitle,
+ 
 }: {
   title: string;
   image: string;

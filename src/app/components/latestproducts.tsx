@@ -1,16 +1,12 @@
 import Image from "next/image";
 import React from "react";
-import { FaRegHeart } from "react-icons/fa";
-import { FiShoppingCart } from "react-icons/fi";
-import { FaSearchPlus } from "react-icons/fa";
-import { client } from "@/sanity/lib/client";
-import { groq } from "next-sanity";
+import { Product } from "@/types";
 
 import Link from "next/link";
 import { fetchLatestproducts } from "@/lib/queries";
 
 const Latestproducts = async () => {
-  const fetchproduct = await fetchLatestproducts();
+  const fetchproduct: Product[] = await fetchLatestproducts();
   
   return (
     <div className="body container wrapper">
@@ -45,7 +41,7 @@ const Latestproducts = async () => {
 
       {/* Product grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-center gap-5 px-4 md:px-14 overflow-hidden wrapper mt-[45px]">
-        {fetchproduct.map((product: any) => (
+        {fetchproduct.map((product) => (
           <Link href={`/product/${product.slug}`} key={product._id}>
             {/* Card 1 */}
             <div className="w-full max-w-[365px] mx-auto transition-transform transform hover:scale-105 hover:bg-slate-200 ">

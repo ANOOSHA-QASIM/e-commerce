@@ -4,9 +4,10 @@ import { fetchHomePic } from "@/lib/queries";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { Product } from "@/types";
 
 const Promotion = () => {
-  const [fetchproduct, setFetchProduct] = useState<any[]>([]);
+  const [fetchproduct, setFetchProduct] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +19,7 @@ const Promotion = () => {
 
   return (
     <div className="container mx-auto px-6 md:px-0 ">
-      {fetchproduct.map((product: any) => (
+      {fetchproduct.map((product: Product) => (
         <Link href={`/product/${product.slug}`} key={product.slug}>
           <div className="flex flex-col lg:flex-row items-center justify-center relative bg-[#F2F0FF] p-6 md:p-12 rounded-lg">
             {/* Left Side */}

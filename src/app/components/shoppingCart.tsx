@@ -16,7 +16,7 @@ const Page = () => {
 
   const router = useRouter();
   const { cart, removeFromCart, updateQuantity, clearCart, updateCart, total } = useCart();
-  const [localCart, setLocalCart] = useState(cart);
+  const [localCart] = useState(cart);
 
   const handleUpdateCart = () => {
     updateCart(localCart);
@@ -48,7 +48,7 @@ const Page = () => {
                       className="absolute top-0 right-0 bg-black text-white p-1 rounded-full cursor-pointer"
                       onClick={() => removeFromCart(item._id)}
                     />
-                    <Image src={item.image} alt="product" width={80} height={80} />
+                    <Image src={item.image || "/placeholder.png"} alt="product" width={80} height={80} />
                   </div>
                   <div>
                     <h3 className="text-[#000] text-sm sm:text-base font-medium">{item.title}</h3>

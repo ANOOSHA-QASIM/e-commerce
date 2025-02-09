@@ -1,9 +1,9 @@
 import React from "react";
 import Common from "../components/common";
-import { groq } from "next-sanity";
-import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
+import { Product } from "@/types"; 
+import { fetchAllProducts } from "@/lib/queries";
 
 const colours = (
   <div className="h-[10px] flex gap-1 items-center justify-center mt-2">
@@ -14,20 +14,8 @@ const colours = (
 );
 
 const Page = async () => {
-  const fetchproduct = await client.fetch(groq`
-    *[_type == 'product']{
-      _id,
-      name,
-      "slug": slug.current,
-      price,
-      description,
-      "imageUrl": image.asset->url,
-      discountPercentage,
-      isFeaturedProduct,
-      stockLevel,
-      category
-    }
-  `);
+  const fetchproduct: Product[] = await fetchAllProducts()
+  
 
   return (
     <div className="container mx-auto px-4 md:px-0">
@@ -35,7 +23,7 @@ const Page = async () => {
       
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:px-14">
-        {fetchproduct.map((product: any) => (
+        {fetchproduct.map((product) => (
           <Link href={`/product/${product.slug}`} key={product._id} className="flex justify-center">
             <div className="w-full max-w-[270px] h-auto mt-8 sm:mt-12 transition-transform transform hover:scale-105">
               <div className="bg-[#F6F7FB] p-1 hover:bg-[#EAEAEA] transition-all duration-300 ease-in-out">

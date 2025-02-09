@@ -6,7 +6,7 @@ import { groq } from 'next-sanity';
 import React from 'react'
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-    const {slug}:any = params;
+    const {slug} = params;
     const product = await client.fetch(  groq`*[_type == 'product']{
         _id,
         name,
@@ -19,7 +19,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
         stockLevel,
         category
       }`, )
-      const products = product.find((products:any)=>products.slug == slug);
+      const products = product.find((products: { slug: string; })=>products.slug == slug);
       console.log(product)
     
   return (

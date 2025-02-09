@@ -1,8 +1,7 @@
 import React from 'react'
 import Common from "../components/common";
 import Image from 'next/image';
-import { SignedOut } from '@clerk/clerk-react';
-import { SignInButton } from '@clerk/clerk-react';
+
 
 
 const Page = () => {
@@ -23,7 +22,7 @@ const Page = () => {
            
             </button>
             
-            <p  className='text-[#9096B2] text-center text-[17px] font-normal leading-[20.4px] mt-8 '> Don't have an Account?Create account</p>
+            <p  className='text-[#9096B2] text-center text-[17px] font-normal leading-[20.4px] mt-8 '> Dont have an Account?Create account</p>
         </div>
       </div>
 

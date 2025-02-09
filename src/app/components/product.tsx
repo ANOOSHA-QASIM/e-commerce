@@ -1,13 +1,12 @@
 import Image from "next/image";
 import React from "react";
-
-import { FaSearchPlus } from "react-icons/fa";
 import { fetchFeatureProducts } from "@/lib/queries";
 import Link from "next/link";
 import Cartbutton from "./cartbutton";
+import type { Product } from "@/types"; 
 
 const Product = async () => {
-  const fetchproduct = await fetchFeatureProducts();
+  const fetchproduct: Product[] = await fetchFeatureProducts();
 
   return (
     <div className="body wrapper">
@@ -15,12 +14,15 @@ const Product = async () => {
       <div className="relative group w-full wrapper h-[42px] mt-[150] text-[42px] text-[#1A0B5B] font-bold items-center flex justify-center">
         Featured Products
       </div>
-      <Cartbutton />
+    
 
       {/* Responsive Grid */}
       <div className="body wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-10 px-4 sm:px-10 md:px-14 mt-[45px]">
-        {fetchproduct.map((product: any) => (
+      
+        {fetchproduct.map((product: Product) => (
+          
           <Link href={`/product/${product.slug}`} key={product.slug}>
+            <Cartbutton product={product} />
             {/* Box for each product */}
             <div className="w-full h-[361px] transition-transform transform hover:scale-105 flex flex-col justify-between">
               <div className="w-full h-[236px] bg-[#F6F7FB] p-10 flex justify-center items-center">

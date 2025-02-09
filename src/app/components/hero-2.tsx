@@ -2,13 +2,14 @@ import { fetchhero2pic } from "@/lib/queries";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Product } from "@/types";
 
 const Hero2 = async () => {
-  const fetchproducts = await fetchhero2pic();
+  const fetchproducts: Product[] = await fetchhero2pic();
 
   return (
     <div className="body h-full container px-14 md:min-h-[579px] mt-[150px] flex bg-[#F1F0FF] items-center justify-center">
-      {fetchproducts.map((product: any) => (
+      {fetchproducts.map((product) => (
         <Link href={`/product/${product.slug}`} key={product.slug}>
           <div className="wrapper flex flex-col lg:flex-row items-center justify-center gap-12 sm:gap-8">
             {/* Image Section */}

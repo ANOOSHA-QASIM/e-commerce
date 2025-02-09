@@ -1,7 +1,5 @@
 // Shoplist Route with Proper Responsive Fixes
 import React from "react";
-import { FiGrid, FiMenu } from "react-icons/fi";
-import { IoIosArrowDown } from "react-icons/io";
 import Common from "../components/common";
 import Image from "next/image";
 

@@ -2,14 +2,15 @@ import React from 'react'
 import Image from "next/image";
 import Link from "next/link";
 import { fetchDealright } from '@/lib/queries';
+import { Product } from "@/types";
 
 const Dealright = async () => {
-     const fetchproduct = await fetchDealright();
+     const fetchproduct: Product[] = await fetchDealright();
   return (
     
     <div className="flex flex-col gap-6">
-    {fetchproduct.map((product:any ) => (
-           <Link href={`/product/${product.slug}`}>
+    {fetchproduct.map((product) => (
+           <Link href={`/product/${product.slug}`} key={product._id}>
         
   
         <div className="w-[267px] h-[74px]   flex transition-transform transform hover:scale-105 " >

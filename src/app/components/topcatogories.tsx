@@ -2,9 +2,10 @@ import { fetchtopcatogories } from "@/lib/queries";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Product } from "@/types";
 
 const Topcatogories = async () => {
-  const fetchproduct = await fetchtopcatogories();
+  const fetchproduct: Product[]  = await fetchtopcatogories();
   return (
     <div className="body container">
       <div className="w-full wrapper h-[42px] mt-[90px] text-[42px] leading-[49.22px] text-[#1A0B5B] font-bold items-center flex justify-center ">
@@ -15,7 +16,7 @@ const Topcatogories = async () => {
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-6 sm:px-8 md:px-10 lg:px-14 xl:px-20 body justify-center items-center place-items-center sm:mt-16 md:mt-20 lg:mt-24 mt-[55px]">
 
 
-        {fetchproduct.map((product: any) => (
+        {fetchproduct.map((product) => (
           <Link key={product.slug} href={`/product/${product.slug}`}>
             {/* Category Box */}
             <div className="w-[269px] h-[345px] md:w-[200px] sm:w-[160px] justify-center items-center transition-transform transform hover:scale-105">

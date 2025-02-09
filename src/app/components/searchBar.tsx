@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { Product } from "@/types";
 
-const SearchBar = ({ products }: { products: any[] }) => {
+const SearchBar = ({ products }: { products: Product[] }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const SearchBar = ({ products }: { products: any[] }) => {
                 className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
                 onClick={() => handleSearchClick(product.slug)}
               >
-                <img src={product.imageUrl} alt={product.name} className="w-10 h-10 object-cover rounded" />
+                <Image src={product.imageUrl} alt={product.name} width={50} height={50} className="w-10 h-10 object-cover rounded" />
                 <p className="text-sm text-gray-700">{product.name}</p>
               </div>
             ))

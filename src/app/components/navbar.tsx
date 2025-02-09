@@ -1,19 +1,19 @@
 "use client"; // Client-side component
 
 import Link from "next/link";
-import { FiSearch } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi"; // Hamburger menu
 import SearchBar from "./searchBar";
 import React, { useState, useEffect } from "react";
 import { client } from "@/sanity/lib/client"; // Sanity client import
+import { Product } from "@/types";
 import {
   Sheet,
   SheetContent,
 } from "@/components/ui/sheet"; // Sheet component from ShadCN UI
 
 const Navbar = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // for Sheet component
 
@@ -108,7 +108,7 @@ const Navbar = () => {
       </ul>
 
       {/* Search Bar - Visible on all screen sizes */}
-      <div className="sm:block md:block lg:block flex items-center block">
+      <div className="sm:block md:block lg:block flex items-center">
         <SearchBar products={products} />
       </div>
 

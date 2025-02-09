@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
+import { Product } from "@/types";
 
 const Discount = async () => {
-  const fetchproduct = await fetchDiscountproduct();
+  const fetchproduct: Product[] = await fetchDiscountproduct();
   return (
     <div className="body px-6 sm:px-8 md:px-14 justify-center container">
-      {fetchproduct.map((product: any) => (
+      {fetchproduct.map((product) => (
         <Link key={product.slug} href={`/product/${product.slug}`}>
           {/* Heading */}
           <div className="w-full wrapper h-[42px] mt-[80px] md:mt-[120px] text-[32px] md:text-[42px] text-[#1A0B5B] font-bold flex justify-center">

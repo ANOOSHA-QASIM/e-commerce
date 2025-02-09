@@ -1,12 +1,8 @@
 import React from "react";
 import { FiGrid, FiMenu } from "react-icons/fi";
 import Common from "../components/common";
-import Sidebar from "../components/sidebar";
-import Image from "next/image";
 import { IoIosArrowDown } from "react-icons/io";
-import { IoMdCheckmark } from "react-icons/io";
-import { FaStar } from "react-icons/fa6";
-import { CiSearch } from "react-icons/ci";
+
 
 const Page = () => {
   return (

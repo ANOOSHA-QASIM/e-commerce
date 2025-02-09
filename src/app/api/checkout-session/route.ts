@@ -5,9 +5,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: "2025-01-27.acacia", // Latest version use karo
   });
 
-export async function POST(req: Request) {
+export async function POST() {
   try {
-    const { items } = await req.json();
+
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       });
 
     return NextResponse.json({ id: session.id });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to create session" }, { status: 500 });
   }
 }

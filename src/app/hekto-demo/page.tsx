@@ -1,7 +1,4 @@
 import React from "react";
-import Common from "../components/common";
-import Image from "next/image";
-import { IoIosCheckmark } from "react-icons/io";
 import Hektodemo from "../components/hektodemo";
 
 

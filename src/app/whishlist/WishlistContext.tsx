@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface WishlistItem {
   _id: number;
   name: string;
-  price: string;
+  price: number;
   imageUrl: string;
 }
 

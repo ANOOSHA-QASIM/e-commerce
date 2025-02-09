@@ -25,7 +25,7 @@ const Topbar = () => {
     router.push("/hekto-demo");
   };
 
-  const cartCount = cart.reduce((count: any, item: any) => count + item.quantity, 0);
+  const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
 
   return (
     <main className="body h-auto bg-[#7E33E0] container font-semibold flex items-center text-[#F1F1F1] text-[16px] py-2">

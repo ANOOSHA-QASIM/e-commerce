@@ -3,11 +3,15 @@
 import React from "react";
 import Common from "../components/common";
 import Image from "next/image";
-import { FaStar, FaRegHeart, FaFacebook } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
-import { IoLogoTwitter, IoArrowForwardOutline } from "react-icons/io5";
+import { FaStar, FaRegHeart } from "react-icons/fa";
+import { IoArrowForwardOutline } from "react-icons/io5";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../whishlist/WishlistContext";
+import { Product } from "@/types";
+
+interface ProductDetailProps {
+  product: Product;
+}
 
 interface Data {
   id: number;
@@ -16,7 +20,7 @@ interface Data {
   price: string;
 }
 
-const ProductDetail = ({ product }: any) => {
+const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
 
@@ -29,19 +33,19 @@ const ProductDetail = ({ product }: any) => {
       price: "$43.00",
     },
     {
-      id: 1,
+      id: 2,
       img: "/prod2.png",
       title: "Women’s Fashion",
       price: "$67.00",
     },
     {
-      id: 1,
+      id: 3,
       img: "/prod3.png",
       title: "Wolx Dummy Fashion",
       price: "$67.00",
     },
     {
-      id: 1,
+      id: 4,
       img: "/prod4.png",
       title: "Top Wall Digital Clock",
       price: "$51.00",
@@ -56,6 +60,15 @@ const ProductDetail = ({ product }: any) => {
       image: product.imageUrl || "/placeholder.png",
       quantity: 1,
     });
+  };
+  const handleAddToWishlist = () => {
+    addToWishlist({
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl || "/placeholder.png",
+    });
+    
   };
 
   return (
@@ -139,7 +152,7 @@ const ProductDetail = ({ product }: any) => {
               Add To Cart
             </button>
             <button
-              onClick={() => addToWishlist(product)}
+              onClick={handleAddToWishlist}
               className="flex items-center gap-2 text-red-500"
             >
               <FaRegHeart /> Add to Wishlist

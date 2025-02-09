@@ -1,6 +1,6 @@
 // components/Loader.tsx
 import React from "react";
-import Image from "next/image"; // Agar tumhe image-based loader chahiye
+
 
 const Loader = () => {
   return (

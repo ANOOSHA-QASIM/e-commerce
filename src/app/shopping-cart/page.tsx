@@ -1,7 +1,6 @@
 
 
 import React from "react";
-import { CartProvider} from "../context/CartContext";
 import ShoppingCart from "../components/shoppingCart";
 
 
