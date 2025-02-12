@@ -91,7 +91,7 @@ const CheckoutPage = () => {
                 <div key={item._id} className="flex items-center gap-4">
                   <Image
                     src={item.image}
-                    alt={item.title}
+                    alt={"image"}
                     width={50}
                     height={50}
                     className="rounded-md"
