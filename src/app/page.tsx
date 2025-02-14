@@ -4,7 +4,7 @@ import React from "react";
 
 
 
-import Promotion from "./components/promotion";
+import Promotion from "./components/Promotions";
 import Product from "./components/product";
 import Latestproducts from "./components/latestproducts";
 import Offer from "./components/offer";
