@@ -12,7 +12,6 @@ const Promotion = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchHomePic();
-      console.log("Fetched Data:", data);
       setFetchProduct(data);
     };
     fetchData();
