@@ -1,10 +1,11 @@
 
 
 import React from "react";
+import dynamic from "next/dynamic";
 
 
 
-import Promotion from "./components/Promotions";
+const Promotion = dynamic(() => import("./components/Promotions"), { ssr: false });
 import Product from "./components/product";
 import Latestproducts from "./components/latestproducts";
 import Offer from "./components/offer";
