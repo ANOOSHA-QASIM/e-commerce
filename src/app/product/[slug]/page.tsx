@@ -1,18 +1,16 @@
-
-import ProductDetail from '../../components/producDetails';
-import { client } from '@/sanity/lib/client';
-import { groq } from 'next-sanity';
-import React from 'react';
+import ProductDetail from "../../components/producDetails";
+import { client } from "@/sanity/lib/client";
+import { groq } from "next-sanity";
+import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-// ✅ Remove `NextPage<PageProps>` & use a normal async function
 const Page = async ({ params }: PageProps) => {
-  const { slug } = params;
+  const { slug } = await params;
 
-  // ✅ Correct way to fetch product
   const product = await client.fetch(
     groq`*[_type == 'product' && slug.current == $slug][0]{
       _id,
@@ -29,8 +27,9 @@ const Page = async ({ params }: PageProps) => {
     { slug }
   );
 
+  // ✅ Show "Not Found" page if product is missing
   if (!product) {
-    return <div>Product not found</div>;
+    notFound();
   }
 
   return (
@@ -40,40 +39,16 @@ const Page = async ({ params }: PageProps) => {
   );
 };
 
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  return {
+    title: `Product - ${slug}`,
+    description: `Details of product ${slug}`,
+  };
+}
+
 export default Page;
 
 
-
-
-// import ProducDetail from '@/app/components/producDetails';
-// import { client } from '@/sanity/lib/client';
-// import { groq } from 'next-sanity';
-// import { NextPage } from "next";
-// interface PageProps {
-//   params: { slug: string };
-// }
-// import React from 'react'
-
-// const Page: NextPage<PageProps> = async ({ params }) => {
-//   const { slug } = params;
-//     const product = await client.fetch(  groq`*[_type == 'product']{
-//         _id,
-//         name,
-//        "slug": slug.current,
-//         price,
-//         description,
-//         "imageUrl": image.asset->url,
-//         discountPercentage,
-//         isFeaturedProduct,
-//         stockLevel,
-//         category
-//       }`, )
-//       const products = product.find((products: { slug: string; })=>products.slug == slug);
-//       console.log(product)
-    
-//   return (
-//     <div><ProducDetail product={products} /></div>
-//   )
-// }
-
-// export default Page
