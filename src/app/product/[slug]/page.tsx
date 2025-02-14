@@ -2,16 +2,17 @@
 import ProductDetail from '../../components/producDetails';
 import { client } from '@/sanity/lib/client';
 import { groq } from 'next-sanity';
-import { NextPage } from "next";
 import React from 'react';
 
 interface PageProps {
   params: { slug: string };
 }
 
-const Page: NextPage<PageProps> = async ({ params }) => {
+// ✅ Remove `NextPage<PageProps>` & use a normal async function
+const Page = async ({ params }: PageProps) => {
   const { slug } = params;
 
+  // ✅ Correct way to fetch product
   const product = await client.fetch(
     groq`*[_type == 'product' && slug.current == $slug][0]{
       _id,
@@ -25,7 +26,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
       stockLevel,
       category
     }`,
-    { slug } // Pass slug as a parameter
+    { slug }
   );
 
   if (!product) {
@@ -40,6 +41,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
 };
 
 export default Page;
+
 
 
 
