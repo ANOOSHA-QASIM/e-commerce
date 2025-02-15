@@ -37,9 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Navbar />
               
              
-              {/* {loading && <Loader />} */}
+              {loading && <Loader />}
               
-              {/* ✅ Page Content */}
+            
               {children}
 
               <Footer />
