@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Topbar />
               <Navbar />
               
-              {/* ✅ Loader Show Karna */}
+             
               {/* {loading && <Loader />} */}
               
               {/* ✅ Page Content */}

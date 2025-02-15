@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import { fetchFeatureProducts } from "@/lib/queries";
 import Link from "next/link";
-import Cartbutton from "./cartbutton";
 import type { Product } from "@/types"; 
 
 const Product = async () => {
@@ -22,7 +21,6 @@ const Product = async () => {
         {fetchproduct.map((product: Product) => (
           
           <Link href={`/product/${product.slug}`} key={product.slug}>
-            <Cartbutton product={product} />
             {/* Box for each product */}
             <div className="w-full h-[361px] transition-transform transform hover:scale-105 flex flex-col justify-between">
               <div className="w-full h-[236px] bg-[#F6F7FB] p-10 flex justify-center items-center">

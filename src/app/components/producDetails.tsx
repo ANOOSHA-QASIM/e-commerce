@@ -3,11 +3,14 @@
 import React from "react";
 import Common from "../components/common";
 import Image from "next/image";
-import { FaStar, FaRegHeart } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { IoArrowForwardOutline } from "react-icons/io5";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../whishlist/WishlistContext";
 import { Product } from "@/types";
+import { useState } from "react";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+
 
 interface ProductDetailProps {
   product: Product;
@@ -23,6 +26,7 @@ interface Data {
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
+  const [isLiked, setIsLiked] = useState(false);
 
    
   const data: Data[] = [
@@ -62,6 +66,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
     });
   };
   const handleAddToWishlist = () => {
+    setIsLiked(!isLiked); 
     addToWishlist({
       _id: product._id,
       name: product.name,
@@ -152,11 +157,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
               Add To Cart
             </button>
             <button
-              onClick={handleAddToWishlist}
-              className="flex items-center gap-2 text-red-500"
-            >
-              <FaRegHeart /> Add to Wishlist
-            </button>
+      onClick={handleAddToWishlist}
+      className={`flex items-center gap-2 ${
+        isLiked ? "text-red-500" : "text-gray-500"
+      }`}
+    >
+      {isLiked ? <FaHeart /> : <FaRegHeart />} Add to Wishlist
+    </button>
           </div>
 
           {/* Categories & Tags */}
