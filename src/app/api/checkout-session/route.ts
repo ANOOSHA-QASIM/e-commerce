@@ -25,11 +25,12 @@ export async function POST(req: Request) {
       ],
       mode: "payment",
       success_url: `${origin}/success`, // ✅ Automatically detects success page URL
-      cancel_url: `${origin}/cancel`,   // ✅ Automatically detects cancel page URL
+      cancel_url: `${origin}/cancel`,   
     });
 
     return NextResponse.json({ id: session.id });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to create session" }, { status: 500 });
+    console.error("Stripe Checkout Session Error:", error); // ✅ Error logging
+    return NextResponse.json({ error: (error as Error).message || "Failed to create session" }, { status: 500 });
   }
 }
