@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config(); 
+
 import { createClient } from '@sanity/client';
 import axios from 'axios';
-import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -10,24 +12,35 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const client = createClient({
   projectId: "70qw9f2u",
-  dataset:"production",
-  token: "sk5IXpqUVTp0hmHeB28G72aCw6wddaTg7QpbMikCWRf5Tj4rCTHkV6IJH2NfwkjjjhGPCggjeZKu775UBYrC6aRbRucGzy73R7zFEwthXaT9QN05nZ5KpUKJxCRUgFOWQYx98n4w0p6blluW2LiSmwHekHCycXCrC8NiYUZ2Xlo8Cj7CFXB8",
+  dataset: "production",
+  token: process.env.SANITY_TOKEN,  // Secure token handling
   apiVersion: "2021-10-21",
   useCdn: false,
 });
 
 async function uploadImageToSanity(imageUrl) {
+  if (!imageUrl) {
+    console.error("Image URL is missing!");
+    return null;
+  }
+
   try {
-    console.log(`Uploading Image : ${imageUrl}`);
+    console.log(`Uploading Image: ${imageUrl}`);
     const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+
+    if (!response.data) {
+      console.error(`Invalid image data: ${imageUrl}`);
+      return null;
+    }
+
     const buffer = Buffer.from(response.data);
     const asset = await client.assets.upload('image', buffer, {
       filename: imageUrl.split('/').pop(),
     });
-    console.log(`Image Uploaded Successfully : ${asset._id}`);
+
+    console.log(`Image Uploaded Successfully: ${asset._id}`);
     return asset._id;
-  } 
-  catch (error) {
+  } catch (error) {
     console.error('Failed to Upload Image:', imageUrl, error);
     return null;
   }
@@ -35,9 +48,13 @@ async function uploadImageToSanity(imageUrl) {
 
 async function importData() {
   try {
-    console.log('Fetching Product Data From API ...');
+    console.log('Fetching Product Data From API...');
 
-    const response = await axios.get("https://next-ecommerce-template-4.vercel.app/api/product")
+    const response = await axios.get("https://next-ecommerce-template-4.vercel.app/api/product");
+    if (!response.data || !response.data.products) {
+      throw new Error("Invalid API Response");
+    }
+
     const products = response.data.products;
 
     for (const item of products) {
@@ -56,7 +73,7 @@ async function importData() {
         description: item.description || '',
         discountPercentage: item.discountPercentage || 0,
         stockLevel: item.stockLevel || 0,
-        isFeaturedProduct: item.isFeaturedProduct,
+        isFeaturedProduct: item.isFeaturedProduct || false,
         image: imageRef
           ? {
               _type: 'image',
@@ -68,16 +85,16 @@ async function importData() {
           : undefined,
       };
 
-      console.log(`Uploading ${sanityItem.category} - ${sanityItem.name} to Sanity !`);
+      console.log(`Uploading ${sanityItem.category} - ${sanityItem.name} to Sanity!`);
       const result = await client.create(sanityItem);
       console.log(`Uploaded Successfully: ${result._id}`);
-      console.log("----------------------------------------------------------")
-      console.log("\n\n")
+      console.log("----------------------------------------------------------");
+      console.log("\n\n");
     }
 
-    console.log('Data Import Completed Successfully !');
+    console.log('Data Import Completed Successfully!');
   } catch (error) {
-    console.error('Error Importing Data : ', error);
+    console.error('Error Importing Data:', error);
   }
 }
 
