@@ -8,7 +8,7 @@ const Topcatogories = async () => {
   const fetchproduct: Product[]  = await fetchtopcatogories();
   return (
     <div className="body container">
-      <div className="w-full wrapper h-[42px] mt-[90px] text-[42px] leading-[49.22px] text-[#1A0B5B] font-bold items-center flex justify-center ">
+      <div className=" wrapper h-[42px] mt-[90px] text-[42px] leading-[49.22px] text-[#1A0B5B] font-bold items-center flex justify-center text-center ">
         Top Categories
       </div>
      

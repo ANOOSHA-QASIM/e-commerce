@@ -9,21 +9,21 @@ const Latestproducts = async () => {
   const fetchproduct: Product[] = await fetchLatestproducts();
   
   return (
-    <div className="body container wrapper">
+    <div className="body  wrapper">
       {/* latest product */}
-      <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 mt-14">
+      <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 mt-14 mr-6">
   <div className="w-6 h-1 bg-[#FB2E86] rounded-full"></div>
   <div className="w-4 h-1 bg-[#FEBAD7] rounded-full"></div>
   <div className="w-4 h-1 bg-[#FEBAD7] rounded-full"></div>
   <div className="w-4 h-1 bg-[#FEBAD7] rounded-full"></div>
 </div>
 
-      <div className="w-full wrapper h-[42px] mt-[65px] text-[42px] text-[#1A0B5B] font-bold items-center flex justify-center">
+      <div className=" text-center wrapper h-[42px] mt-[65px] text-[42px] text-[#1A0B5B] font-bold items-center flex justify-center">
         Latest Products
       </div>
 
      {/* options div */}
-<div className="w-full flex flex-wrap justify-center md:justify-center items-center text-[#151875] font-medium text-[18px] mt-8 wrapper">
+<div className="flex flex-wrap justify-center md:justify-center items-center text-[#151875] font-medium text-[18px] mt-10 wrapper">
   <h1 className="hover:text-[#FB2E86] underline cursor-pointer mb-4 md:mb-0 md:text-left mx-2">
     New Arrival
   </h1>
@@ -40,7 +40,7 @@ const Latestproducts = async () => {
 
 
       {/* Product grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-center gap-5 px-4 md:px-14 overflow-hidden wrapper mt-[45px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-center items-center gap-6 px-4 sm:px-10 md:px-14 overflow-hidden wrapper mt-[45px]">
         {fetchproduct.map((product) => (
           <Link href={`/product/${product.slug}`} key={product._id}>
             {/* Card 1 */}

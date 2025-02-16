@@ -12,7 +12,7 @@ const Trendingproducts = async () => {
 
   return (
     <div className="wrapper">
-      <div className="w-full wrapper h-[42px] mt-[120px] text-[42px] text-[#1A0B5B] font-bold items-center flex justify-center">
+      <div className="text-center wrapper h-[42px] mt-[120px] text-[42px] text-[#1A0B5B] font-bold items-center flex justify-center">
         Trending Products
       </div>
       <div className="flex flex-wrap gap-4 px-6 sm:px-14 body justify-evenly items-center mt-[45px] h-auto">

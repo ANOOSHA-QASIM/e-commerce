@@ -24,13 +24,18 @@ const SearchBar = ({ products }: { products: Product[] }) => {
   }, [searchTerm, products]);
 
   const handleSearchClick = (slug: string) => {
-    router.push(`/product/${slug}`);  // Fixed this part with backticks
+    // ✅ Fix: Search result click hone ke baad search box clear karna
+    setSearchTerm("");
+    setFilteredProducts([]);
+
+    // ✅ Product page pe navigate karna
+    router.push(`/product/${slug}`);
   };
 
   return (
-    <div className="relative w-full max-w-[400px]">
+    <div className="relative w-full md:max-w-[400px]">
       {/* Search Input */}
-      <div className="flex w-full h-[40px] bg-[#E7E6EF] rounded-md overflow-hidden">
+      <div className="flex w-[190px] sm:w-[180px] md:w-full h-[40px] bg-[#E7E6EF] rounded-md overflow-hidden">
         <input
           type="text"
           placeholder="Search for products..."
@@ -38,28 +43,30 @@ const SearchBar = ({ products }: { products: Product[] }) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className="w-[50px] bg-[#FB2E86] flex items-center justify-center">
+        <button className="md:w-[30px] w-[20px] sm:w-[full] bg-[#FB2E86] flex items-center justify-center">
           <FiSearch className="text-white text-lg" />
         </button>
       </div>
 
       {/* Search Results */}
-      {searchTerm && (
+      {searchTerm && filteredProducts.length > 0 && (
         <div className="absolute top-[42px] left-0 w-full bg-white shadow-lg rounded-md max-h-[200px] overflow-y-auto border mt-1 z-50">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <div
-                key={product._id}
-                className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleSearchClick(product.slug)}
-              >
-                <Image src={product.imageUrl} alt={product.name} width={50} height={50} className="w-10 h-10 object-cover rounded" />
-                <p className="text-sm text-gray-700">{product.name}</p>
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-gray-500 py-2">No products available</p>
-          )}
+          {filteredProducts.map((product) => (
+            <div
+              key={product._id}
+              className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleSearchClick(product.slug)}
+            >
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                width={50}
+                height={50}
+                className="w-10 h-10 object-cover rounded"
+              />
+              <p className="text-sm text-gray-700">{product.name}</p>
+            </div>
+          ))}
         </div>
       )}
     </div>

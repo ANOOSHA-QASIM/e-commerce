@@ -12,12 +12,12 @@ const Discount = async () => {
       {fetchproduct.map((product) => (
         <Link key={product.slug} href={`/product/${product.slug}`}>
           {/* Heading */}
-          <div className="w-full wrapper h-[42px] mt-[80px] md:mt-[120px] text-[32px] md:text-[42px] text-[#1A0B5B] font-bold flex justify-center">
+          <div className="text-center wrapper h-[42px] mt-[80px] md:mt-[120px] text-[32px] md:text-[42px] text-[#1A0B5B] font-bold flex justify-center">
             Discount Item
           </div>
 
           {/* Main Container */}
-          <div className="max-w-[1214px] w-full h-auto md:h-[597px] wrapper mt-10 px-4 sm:px-6 md:px-14">
+          <div className="max-w-[1214px] text-center h-auto md:h-[597px] wrapper mt-10 px-4 sm:px-6 md:px-14">
             {/* Options div */}
             <div className="flex flex-wrap justify-center md:space-x-4 items-center text-[#151875] font-medium text-[16px] md:text-[18px] space-x-4  wrapper">
               <h1 className="hover:text-[#FB2E86] hover:underline cursor-pointer">

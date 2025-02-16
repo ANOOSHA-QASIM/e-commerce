@@ -1,7 +1,10 @@
+"use client"
+
 import React from 'react'
 import Common from "../components/common";
 import Image from 'next/image';
-
+import { SignedOut } from "@clerk/clerk-react";
+import { SignInButton } from "@clerk/clerk-react";
 
 
 const Page = () => {
@@ -18,9 +21,11 @@ const Page = () => {
             <input type="text" placeholder='Email Address' className='md:max-w-[432px] w-full h-[52px] border-[1px] rounded-[2px] border-[#C2C5E1] text-[#9096B2] text-[16px] font-normal mt-6 pl-3 ' />
             <input type="text" placeholder='Password' className='md:max-w-[432px] w-full h-[52px] border-[1px] rounded-[2px] border-[#C2C5E1] text-[#9096B2] text-[16px] font-normal mt-5 pl-3' />
             <p  className='text-[#9096B2] text-[17px] font-normal leading-[20.4px] mt-4'>Forgot your password?</p>
-            <button className='md:max-w-[432px] w-full h-[52px] bg-[#FB2E86] text-[17px] font-bold text-[#FFFFFF] text-center mt-5 rounded-[3px] '>
-           
-            </button>
+            <p className='md:max-w-[432px] w-full h-[52px] bg-[#FB2E86] text-[17px] font-bold text-[#FFFFFF] text-center mt-5 rounded-[3px] p-3 '>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            </p>
             
             <p  className='text-[#9096B2] text-center text-[17px] font-normal leading-[20.4px] mt-8 '> Dont have an Account?Create account</p>
         </div>

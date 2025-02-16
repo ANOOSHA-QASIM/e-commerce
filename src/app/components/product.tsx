@@ -10,7 +10,7 @@ const Product = async () => {
   return (
     <div className="body wrapper">
       {/* heading div */}
-      <div className="relative group w-full wrapper h-[42px] mt-[150] text-[42px] text-[#1A0B5B] font-bold items-center flex justify-center">
+      <div className=" text-center w-full wrapper mt-[150] text-[42px] text-[#1A0B5B] font-bold items-center flex justify-center">
         Featured Products
       </div>
     

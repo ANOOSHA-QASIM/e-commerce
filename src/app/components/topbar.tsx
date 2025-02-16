@@ -9,8 +9,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
 import { useRouter } from "next/navigation";
-import { SignedOut } from "@clerk/clerk-react";
-import { SignInButton } from "@clerk/clerk-react";
+
 
 import { useWishlist } from "../whishlist/WishlistContext";
 import Link from "next/link";
@@ -42,9 +41,7 @@ const Topbar = () => {
               <BiPhoneCall />
               (12345)67890
             </p>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
+           
           </div>
 
           {/* Right Section */}

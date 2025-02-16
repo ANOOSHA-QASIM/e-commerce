@@ -10,6 +10,7 @@ import { Product } from "@/types";
 import {
   Sheet,
   SheetContent,
+  SheetTitle, // Fix: Import SheetTitle
 } from "@/components/ui/sheet"; // Sheet component from ShadCN UI
 
 const Navbar = () => {
@@ -48,21 +49,26 @@ const Navbar = () => {
   };
 
   return (
-    <header className="px-4 sm:px-6 md:px-8 md:wrapper lg:px-14 h-auto my-[19px] w-full flex justify-between items-center wrapper">
+    <header className="px-5 sm:px-6 md:px-8 md:wrapper lg:px-14 h-auto my-[19px] w-full flex justify-between items-center wrapper">
       {/* Logo */}
       <div>
-        <h1 className="text-[#0D0E43] font-bold text-[34px] leading-[34px]">Hekto</h1>
+        <h1 className="text-[#0D0E43] font-bold md:text-[34px] text-[25px] leading-[34px]">
+          Hekto
+        </h1>
       </div>
 
       {/* Desktop and Medium Screens Navbar */}
-      <ul className="hidden md:hidden  lg:flex gap-8 font-normal text-[16px] leading-5 text-[#0D0E43] justify-center items-center">
+      <ul className="hidden md:hidden lg:flex gap-8 font-normal text-[16px] leading-5 text-[#0D0E43] justify-center items-center">
         <li className="text-[#FB2E86] flex items-center">
           <Link href="/">Home</Link>
         </li>
         <ul className="flex space-x-4">
           {/* Pages Dropdown */}
           <li className="relative">
-            <button onClick={toggleDropdown} className="flex items-center px-4 py-2 rounded focus:outline-none">
+            <button
+              onClick={toggleDropdown}
+              className="flex items-center px-4 py-2 rounded focus:outline-none"
+            >
               Pages <FaChevronDown className="ml-2" />
             </button>
 
@@ -113,7 +119,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navbar - Hamburger Icon */}
-      <div className="lg:hidden  flex items-center">
+      <div className="lg:hidden flex items-center">
         <button onClick={() => setIsOpen(true)}>
           <FiMenu className="text-[#0D0E43] text-2xl" />
         </button>
@@ -122,7 +128,9 @@ const Navbar = () => {
       {/* Sheet Component for Mobile and below Medium Screens */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetContent>
-          {/* Inside the sheet */}
+          {/* Fix: Hidden SheetTitle for Accessibility */}
+          <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
+
           <div className="p-4">
             <ul className="flex flex-col space-y-4 text-gray-800">
               <li>
@@ -141,9 +149,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/faq" onClick={() => setIsOpen(false)}>
-                  FAQ
-                </Link>
+                <Link href="/faq" onClick={() => setIsOpen(false)}>FAQ</Link>
               </li>
               <li>
                 <Link href="/order-completed" onClick={() => setIsOpen(false)}>
@@ -164,7 +170,6 @@ const Navbar = () => {
           </div>
         </SheetContent>
       </Sheet>
-
     </header>
   );
 };

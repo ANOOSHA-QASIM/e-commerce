@@ -26,7 +26,7 @@ const Aboutfeatures = () => {
     },
     {
       id: 4,
-      img: "/24-hours-support 1.png",
+      img: "/blog-3.png",
       title: "24/7 Support",
     },
   ];

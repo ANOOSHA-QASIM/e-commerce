@@ -18,19 +18,19 @@ export async function POST(req: Request) {
             product_data: {
               name: "Product Name",
             },
-            unit_amount: 5000, // $50.00
+            unit_amount: 5000,
           },
           quantity: 1,
         },
       ],
       mode: "payment",
-      success_url: `${origin}/success`, // ✅ Automatically detects success page URL
+      success_url: `${origin}/success`, 
       cancel_url: `${origin}/cancel`,   
     });
 
     return NextResponse.json({ id: session.id });
   } catch (error) {
-    console.error("Stripe Checkout Session Error:", error); // ✅ Error logging
+    console.error("Stripe Checkout Session Error:", error); 
     return NextResponse.json({ error: (error as Error).message || "Failed to create session" }, { status: 500 });
   }
 }

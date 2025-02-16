@@ -107,46 +107,46 @@ const Hektodemo = () => {
 
           {/* Right Side (Wishlist) */}
           <div className="flex-1">
-            <div className="bg-[#F8F8FD] p-4 sm:p-6 md:p-8 mt-4">
-              {wishlist.length === 0 ? (
-                <p className="text-[#1D3178] text-lg font-bold text-center">
-                  Your Wishlist is Empty!
-                </p>
-              ) : (
-                wishlist.map((item) => (
-                  <div
-                    key={item._id}
-                    className="flex items-center justify-between border-b-2 py-4"
-                  >
-                    <div className="flex gap-4 items-center">
-                      <div className="w-24 h-24 relative">
-                        <Image
-                          src={item.imageUrl || "/placeholder.png"}
-                          alt={item.name}
-                          layout="fill"
-                          objectFit="cover"
-                          className="rounded-md"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-black text-sm font-medium">
-                          {item.name}
-                        </h3>
-                        <p className="text-[#A1A8C1] text-xs">
-                          Price: {item.price}
-                        </p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => removeFromWishlist(item._id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded-md"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))
-              )}
+          <div className="bg-[#F8F8FD] p-4 sm:p-6 md:p-8 mt-4">
+    {wishlist.length === 0 ? (
+      <p className="text-[#1D3178] text-lg font-bold text-center">
+        Your Wishlist is Empty!
+      </p>
+    ) : (
+      wishlist.map((item) => (
+        <div
+          key={item._id}
+          className="flex flex-col sm:flex-row items-center justify-between border-b-2 py-4 gap-4"
+        >
+          {/* Image & Product Details */}
+          <div className="flex items-center gap-4 w-full">
+            <div className="w-24 h-24 flex-shrink-0">
+              <Image
+                src={item.imageUrl || "/placeholder.png"}
+                alt={item.name}
+                width={96}
+                height={96}
+                className="rounded-md object-contain w-full h-full"
+              />
             </div>
+
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-black text-sm font-medium">{item.name}</h3>
+              <p className="text-[#A1A8C1] text-xs">Price: {item.price}</p>
+            </div>
+          </div>
+
+          {/* Remove Button */}
+          <button
+            onClick={() => removeFromWishlist(item._id)}
+            className="bg-red-500 text-white px-4 py-2 rounded-md w-full sm:w-auto"
+          >
+            Remove
+          </button>
+        </div>
+      ))
+    )}
+  </div>
 
             {/* Summary Box */}
             <div className="bg-[#F4F4FC] rounded-md p-6 mt-6">
