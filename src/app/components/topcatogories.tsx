@@ -5,17 +5,15 @@ import React from "react";
 import { Product } from "@/types";
 
 const Topcatogories = async () => {
-  const fetchproduct: Product[]  = await fetchtopcatogories();
+  const fetchproduct: Product[] = await fetchtopcatogories();
   return (
     <div className="body container">
       <div className=" wrapper h-[42px] mt-[90px] text-[42px] leading-[49.22px] text-[#1A0B5B] font-bold items-center flex justify-center text-center ">
         Top Categories
       </div>
-     
-     {/* Category Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-6 sm:px-8 md:px-10 lg:px-14 xl:px-20 body justify-center items-center place-items-center sm:mt-16 md:mt-20 lg:mt-24 mt-[55px]">
 
-
+      {/* Category Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-6 sm:px-8 md:px-10 lg:px-14 xl:px-20 body justify-center items-center place-items-center sm:mt-16 md:mt-20 lg:mt-24 mt-[55px]">
         {fetchproduct.map((product) => (
           <Link key={product.slug} href={`/product/${product.slug}`}>
             {/* Category Box */}
@@ -34,18 +32,18 @@ const Topcatogories = async () => {
                 </div>
               </div>
               <div className="grid justify-center items-center gap-3 mt-3">
-              <p className="font-medium text-[20px] sm:text-[16px] text-[#151875] text-center">
-  {product.name}
-</p>
-<p className="text-[16px] sm:text-[14px] text-[#151875] text-center font-normal">
-  {product.price}
-</p>
+                <p className="font-medium text-[20px] sm:text-[16px] text-[#151875] text-center">
+                  {product.name}
+                </p>
+                <p className="text-[16px] sm:text-[14px] text-[#151875] text-center font-normal">
+                  {product.price}
+                </p>
               </div>
             </div>
           </Link>
         ))}
       </div>
-      
+
       {/* Section with background */}
       <div
         className="container body h-[462px] mt-40 flex justify-center items-center"
@@ -63,12 +61,7 @@ const Topcatogories = async () => {
 
       {/* Full Image */}
       <div className="w-full sm:w-[400px] md:w-[904px] wrapper px-14 mt-24">
-        <Image
-          src={"/full img.png"}
-          alt="full img"
-          width={904}
-          height={93}
-        />
+        <Image src={"/full img.png"} alt="full img" width={904} height={93} />
       </div>
     </div>
   );

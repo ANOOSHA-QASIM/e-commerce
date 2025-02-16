@@ -3,10 +3,9 @@ import { FiGrid, FiMenu } from "react-icons/fi";
 import Common from "../components/common";
 import { IoIosArrowDown } from "react-icons/io";
 
-
 const Page = () => {
   return (
-    <div className="body container mx-auto"> {/* Added mx-auto for centering */}
+    <div className="body container mx-auto">
       <div>
         <Common title="Shop Left Sidebar" subtitle="Shop Left Sidebar" />
       </div>
@@ -22,7 +21,7 @@ const Page = () => {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-8 mt-4 md:mt-0"> {/* Added mt-4 for mobile spacing */}
+        <div className="flex items-center gap-8 mt-4 md:mt-0">
           {/* Per Page */}
           <div className="flex items-center gap-2">
             <label
@@ -61,9 +60,6 @@ const Page = () => {
           </div>
         </div>
       </div>
-
-
-      {/* ... rest of your component ... */}
     </div>
   );
 };

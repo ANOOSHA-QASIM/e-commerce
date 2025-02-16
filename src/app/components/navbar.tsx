@@ -1,22 +1,18 @@
-"use client"; // Client-side component
+"use client";
 
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa";
-import { FiMenu } from "react-icons/fi"; // Hamburger menu
+import { FiMenu } from "react-icons/fi";
 import SearchBar from "./searchBar";
 import React, { useState, useEffect } from "react";
-import { client } from "@/sanity/lib/client"; // Sanity client import
+import { client } from "@/sanity/lib/client";
 import { Product } from "@/types";
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle, // Fix: Import SheetTitle
-} from "@/components/ui/sheet"; // Sheet component from ShadCN UI
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 
 const Navbar = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // for Sheet component
+  const [isOpen, setIsOpen] = useState(false);
 
   // Fetch products from Sanity
   useEffect(() => {
@@ -39,7 +35,6 @@ const Navbar = () => {
     fetchProducts();
   }, []);
 
-  // Toggle the dropdown menu for pages (desktop)
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -113,19 +108,16 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* Search Bar - Visible on all screen sizes */}
       <div className="sm:block md:block lg:block flex items-center">
         <SearchBar products={products} />
       </div>
 
-      {/* Mobile Navbar - Hamburger Icon */}
       <div className="lg:hidden flex items-center">
         <button onClick={() => setIsOpen(true)}>
           <FiMenu className="text-[#0D0E43] text-2xl" />
         </button>
       </div>
 
-      {/* Sheet Component for Mobile and below Medium Screens */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetContent>
           {/* Fix: Hidden SheetTitle for Accessibility */}
@@ -139,7 +131,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/shop-left-sidebar" onClick={() => setIsOpen(false)}>
+                <Link
+                  href="/shop-left-sidebar"
+                  onClick={() => setIsOpen(false)}
+                >
                   Shop Left Sidebar
                 </Link>
               </li>
@@ -149,7 +144,9 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/faq" onClick={() => setIsOpen(false)}>FAQ</Link>
+                <Link href="/faq" onClick={() => setIsOpen(false)}>
+                  FAQ
+                </Link>
               </li>
               <li>
                 <Link href="/order-completed" onClick={() => setIsOpen(false)}>
@@ -157,7 +154,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/shop-grid-default" onClick={() => setIsOpen(false)}>
+                <Link
+                  href="/shop-grid-default"
+                  onClick={() => setIsOpen(false)}
+                >
                   Products
                 </Link>
               </li>

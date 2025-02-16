@@ -2,11 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Loader from "./components/loader"; // ✅ Apne Loader component ko import karo
+import Loader from "./components/loader";
 
-import {
-  ClerkProvider,
-} from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
 import Topbar from "./components/topbar";
@@ -16,16 +14,20 @@ import Footer2 from "./components/footer2";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./whishlist/WishlistContext";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname(); // ✅ Current route track karne ke liye
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 500); // ✅ Smooth transition ke liye 0.5 sec delay
+    const timer = setTimeout(() => setLoading(false), 500);
 
-    return () => clearTimeout(timer); // ✅ Cleanup function
-  }, [pathname]); // ✅ Jab bhi route change ho, loader chale
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return (
     <ClerkProvider>
@@ -35,11 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <CartProvider>
               <Topbar />
               <Navbar />
-              
-             
+
               {loading && <Loader />}
-              
-            
+
               {children}
 
               <Footer />

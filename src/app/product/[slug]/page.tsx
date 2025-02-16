@@ -27,7 +27,6 @@ const Page = async ({ params }: PageProps) => {
     { slug }
   );
 
-  // ✅ Show "Not Found" page if product is missing
   if (!product) {
     notFound();
   }
@@ -50,5 +49,3 @@ export async function generateMetadata({
 }
 
 export default Page;
-
-

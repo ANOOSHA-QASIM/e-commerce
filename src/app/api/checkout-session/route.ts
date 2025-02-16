@@ -16,12 +16,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No items found in the request." }, { status: 400 });
     }
 
-    // ✅ Stripe ke line_items format me fix
+  
     const lineItems = items.map((item, index) => ({
       price_data: {
         currency: "usd",
         product_data: {
-          name: `Product-${index + 1}`, // ✅ Unique name assign kar diya
+          name: `Product-${index + 1}`, 
           images: item.image ? [item.image] : [],
         },
         unit_amount: Math.round(item.price * 100),

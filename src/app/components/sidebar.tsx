@@ -5,7 +5,6 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaSearchPlus } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 
-// Defining interface for product data
 interface Product {
   id: number;
   title: string;
@@ -61,7 +60,6 @@ const products: Product[] = [
 const Sidebar = ({
   title,
   image,
- 
 }: {
   title: string;
   image: string;

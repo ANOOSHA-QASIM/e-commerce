@@ -24,11 +24,9 @@ const SearchBar = ({ products }: { products: Product[] }) => {
   }, [searchTerm, products]);
 
   const handleSearchClick = (slug: string) => {
-    // ✅ Fix: Search result click hone ke baad search box clear karna
     setSearchTerm("");
     setFilteredProducts([]);
 
-    // ✅ Product page pe navigate karna
     router.push(`/product/${slug}`);
   };
 

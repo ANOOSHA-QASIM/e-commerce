@@ -9,42 +9,40 @@
     @apply shadow-[0_8px_40px_0px] shadow-[#31208A0D];
   }
 
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
     width: 100%;
     margin: 0;
     padding: 0;
   }
 
-  .wrapper2 {
-    @apply max-w-screen-md;
-  }
   /* styles/global.css */
   .container {
     max-width: 1920px;
     width: 100%;
     /* Default padding for better spacing */
   }
-  
+
   @media (max-width: 1200px) {
     .container {
       padding: 0 15px;
       max-width: 100%; /* Ensure full width on medium screens */
     }
   }
-  
+
   @media (max-width: 992px) {
     .container {
       padding: 0 12px;
     }
   }
-  
+
   @media (max-width: 768px) {
     .container {
       padding: 0 10px;
     }
   }
-  
+
   @media (max-width: 480px) {
     .container {
       padding: 0 5px;

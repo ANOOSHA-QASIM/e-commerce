@@ -5,7 +5,9 @@ import { useCart } from "../context/CartContext";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 const CheckoutPage = () => {
   const { cart, total } = useCart();
@@ -18,11 +20,10 @@ const CheckoutPage = () => {
       return;
     }
 
-    // ✅ Stripe ke format me convert karo (name remove kar diya)
     const lineItems = cart.map((item) => ({
-      price: item.price, // ✅ Price in dollars
-      quantity: item.quantity, // ✅ Quantity
-      image: item.image, // ✅ Sirf image bhejne ke liye
+      price: item.price,
+      quantity: item.quantity,
+      image: item.image,
     }));
 
     const response = await fetch("/api/checkout-session", {
@@ -53,11 +54,31 @@ const CheckoutPage = () => {
             Billing Details
           </h2>
           <form className="space-y-4">
-            <input type="text" placeholder="Full Name" className="w-full p-3 border border-gray-300 rounded-md" />
-            <input type="email" placeholder="Email Address" className="w-full p-3 border border-gray-300 rounded-md" />
-            <input type="text" placeholder="Address" className="w-full p-3 border border-gray-300 rounded-md" />
-            <input type="text" placeholder="City" className="w-full p-3 border border-gray-300 rounded-md" />
-            <input type="text" placeholder="Postal Code" className="w-full p-3 border border-gray-300 rounded-md" />
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full p-3 border border-gray-300 rounded-md"
+            />
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="w-full p-3 border border-gray-300 rounded-md"
+            />
+            <input
+              type="text"
+              placeholder="Address"
+              className="w-full p-3 border border-gray-300 rounded-md"
+            />
+            <input
+              type="text"
+              placeholder="City"
+              className="w-full p-3 border border-gray-300 rounded-md"
+            />
+            <input
+              type="text"
+              placeholder="Postal Code"
+              className="w-full p-3 border border-gray-300 rounded-md"
+            />
           </form>
         </div>
 
@@ -72,7 +93,13 @@ const CheckoutPage = () => {
             ) : (
               cart.map((item) => (
                 <div key={item._id} className="flex items-center gap-4">
-                  <Image src={item.image} alt={"image"} width={50} height={50} className="rounded-md" />
+                  <Image
+                    src={item.image}
+                    alt={"image"}
+                    width={50}
+                    height={50}
+                    className="rounded-md"
+                  />
                   <div>
                     <p className="text-xs text-gray-500">
                       ${item.price} x {item.quantity}

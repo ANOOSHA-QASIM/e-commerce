@@ -1,8 +1,4 @@
-
-
 import React from "react";
-
-
 
 import Promotion from "./components/Promotions";
 import Product from "./components/product";
@@ -15,37 +11,27 @@ import Topcatogories from "./components/topcatogories";
 import Blog from "./components/blog";
 import { CartProvider } from "./context/CartContext";
 
-
 import { WishlistProvider } from "./whishlist/WishlistContext";
 
-const Home = async() => {
-
-  
-  return (<>
-    <WishlistProvider>
-    <CartProvider>
-    
-    <div>
-    
-           
-      <Promotion />
-      <Product />
-      <Latestproducts />
-      <Offer />
-      <Hero2 />
-      <Trendingproducts />
-      <Discount />
-      <Topcatogories />
-      <Blog />
-    </div>
-    </CartProvider>
-    </WishlistProvider>
-  
+const Home = async () => {
+  return (
+    <>
+      <WishlistProvider>
+        <CartProvider>
+          <div>
+            <Promotion />
+            <Product />
+            <Latestproducts />
+            <Offer />
+            <Hero2 />
+            <Trendingproducts />
+            <Discount />
+            <Topcatogories />
+            <Blog />
+          </div>
+        </CartProvider>
+      </WishlistProvider>
     </>
-
-    // <Hero />
-    // <Footer />
-    // <Footer2 />
   );
 };
 

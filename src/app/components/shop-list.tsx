@@ -19,11 +19,11 @@ interface Product {
 }
 
 const Shoplist = async () => {
-  const fetchproduct: Product[] = await fetchShop();  // ✅ Type specified
+  const fetchproduct: Product[] = await fetchShop();
 
   return (
     <div className="wrapper px-4 sm:px-6 md:px-8 lg:px-12">
-      {fetchproduct.map((product: Product) => (  // ✅ `any` removed, replaced with `Product`
+      {fetchproduct.map((product: Product) => (  
         <Link href={`/product/${product.slug}`} key={product.id}>
           <div className="md:max-w-[1141px] w-full h-auto md:h-[254px] mx-auto mt-6 p-4 flex flex-col md:flex-row items-center shadow-[0_0px_25px_5px] shadow-[#F6F6FD80]  rounded-lg">
             

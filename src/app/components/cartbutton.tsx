@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext";
 import { useWishlist } from "../whishlist/WishlistContext";
 import { FaRegHeart } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
-import { Product } from "@/types"; // ✅ Import proper types
+import { Product } from "@/types";
 
 interface CartButtonProps {
   product: Product;
