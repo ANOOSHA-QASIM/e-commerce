@@ -18,11 +18,11 @@ const CheckoutPage = () => {
       return;
     }
 
-    // ✅ Stripe ke format me convert karo (Ab image bhi send ho rahi hai)
+    // ✅ Stripe ke format me convert karo (name remove kar diya)
     const lineItems = cart.map((item) => ({
       price: item.price, // ✅ Price in dollars
       quantity: item.quantity, // ✅ Quantity
-      image: item.image, // ✅ Image ka URL pass kar rahe hain
+      image: item.image, // ✅ Sirf image bhejne ke liye
     }));
 
     const response = await fetch("/api/checkout-session", {
@@ -74,7 +74,6 @@ const CheckoutPage = () => {
                 <div key={item._id} className="flex items-center gap-4">
                   <Image src={item.image} alt={"image"} width={50} height={50} className="rounded-md" />
                   <div>
-                    <h3 className="text-sm font-medium">{item.title}</h3>
                     <p className="text-xs text-gray-500">
                       ${item.price} x {item.quantity}
                     </p>

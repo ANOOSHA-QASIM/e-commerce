@@ -9,28 +9,27 @@ export async function POST(req: Request) {
   try {
     const { origin } = new URL(req.headers.get("referer") || "http://localhost:3000");
 
-    // ✅ Frontend se items receive karo
     const { items } = await req.json();
-    console.log("Received items from frontend:", items); // Debugging
+    console.log("Received items from frontend:", items);
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "No items found in the request." }, { status: 400 });
     }
 
-    // ✅ Stripe ke format me data convert karo
-    const lineItems = items.map((item) => ({
+    // ✅ Stripe ke line_items format me fix
+    const lineItems = items.map((item, index) => ({
       price_data: {
         currency: "usd",
         product_data: {
-          name: item.name, // ✅ Agar name nahi mila to "Unknown Product" likho
-          images: item.image ? [item.image] : [], // ✅ Stripe checkout page pe image show hogi
+          name: `Product-${index + 1}`, // ✅ Unique name assign kar diya
+          images: item.image ? [item.image] : [],
         },
-        unit_amount: Math.round(item.price * 100), // ✅ Convert to cents
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity || 1,
     }));
 
-    console.log("Formatted Line Items for Stripe:", lineItems); // Debugging
+    console.log("Formatted Line Items for Stripe:", lineItems);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
