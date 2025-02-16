@@ -3,39 +3,42 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
 import Image from "next/image";
-
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-const handleCheckout = async () => {
-  const stripe = await stripePromise;
-
-  const response = await fetch("/api/checkout-session", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: "Product Name",
-            },
-            unit_amount: 2000, // Price in cents (20.00 USD)
-          },
-          quantity: 1,
-        },
-      ],
-    }),
-  });
-
-  const session = await response.json();
-  await stripe?.redirectToCheckout({ sessionId: session.id });
-};
-
 const CheckoutPage = () => {
   const { cart, total } = useCart();
+
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    // ✅ Stripe ke format me convert karo (Ab image bhi send ho rahi hai)
+    const lineItems = cart.map((item) => ({
+      price: item.price, // ✅ Price in dollars
+      quantity: item.quantity, // ✅ Quantity
+      image: item.image, // ✅ Image ka URL pass kar rahe hain
+    }));
+
+    const response = await fetch("/api/checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: lineItems }),
+    });
+
+    const session = await response.json();
+
+    if (session.id) {
+      await stripe?.redirectToCheckout({ sessionId: session.id });
+    } else {
+      console.error("Stripe session creation failed:", session.error);
+    }
+  };
 
   return (
     <div className="container mx-auto px-4">
@@ -50,31 +53,11 @@ const CheckoutPage = () => {
             Billing Details
           </h2>
           <form className="space-y-4">
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full p-3 border border-gray-300 rounded-md"
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full p-3 border border-gray-300 rounded-md"
-            />
-            <input
-              type="text"
-              placeholder="Address"
-              className="w-full p-3 border border-gray-300 rounded-md"
-            />
-            <input
-              type="text"
-              placeholder="City"
-              className="w-full p-3 border border-gray-300 rounded-md"
-            />
-            <input
-              type="text"
-              placeholder="Postal Code"
-              className="w-full p-3 border border-gray-300 rounded-md"
-            />
+            <input type="text" placeholder="Full Name" className="w-full p-3 border border-gray-300 rounded-md" />
+            <input type="email" placeholder="Email Address" className="w-full p-3 border border-gray-300 rounded-md" />
+            <input type="text" placeholder="Address" className="w-full p-3 border border-gray-300 rounded-md" />
+            <input type="text" placeholder="City" className="w-full p-3 border border-gray-300 rounded-md" />
+            <input type="text" placeholder="Postal Code" className="w-full p-3 border border-gray-300 rounded-md" />
           </form>
         </div>
 
@@ -89,13 +72,7 @@ const CheckoutPage = () => {
             ) : (
               cart.map((item) => (
                 <div key={item._id} className="flex items-center gap-4">
-                  <Image
-                    src={item.image}
-                    alt={"image"}
-                    width={50}
-                    height={50}
-                    className="rounded-md"
-                  />
+                  <Image src={item.image} alt={"image"} width={50} height={50} className="rounded-md" />
                   <div>
                     <h3 className="text-sm font-medium">{item.title}</h3>
                     <p className="text-xs text-gray-500">
@@ -118,8 +95,10 @@ const CheckoutPage = () => {
           </div>
 
           {/* Proceed to Payment Button */}
-          <button className="w-full mt-4 px-4 py-2 bg-[#FB2E86] text-white font-bold rounded-md"
-            onClick={handleCheckout}>
+          <button
+            className="w-full mt-4 px-4 py-2 bg-[#FB2E86] text-white font-bold rounded-md"
+            onClick={handleCheckout}
+          >
             Proceed to Payment
           </button>
         </div>
